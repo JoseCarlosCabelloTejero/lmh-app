@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import type { RouteObject } from "react-router-dom";
 import MainLayout from './MainLayout'; // El layout fijo
 import HomePage from '../modules/homePage/components/HomePage.tsx';             
-import Music from '../modules/music/components/Music.tsx';       
+import {MusicPage} from '../modules/music/pages/MusicPage.tsx';       
 import FotosVideos from '../modules/fotosVideos/components/FotosVideos.tsx';
 import CalendarioPagos from '../modules/calendarioPagos/components/CalendarioPagos.tsx';
 import Merchandising from '../modules/merchandising/components/Merchandising.tsx';     
@@ -19,7 +19,7 @@ const routes: RouteObject[] = [
       },
       {
         path: "music",
-        element: <Music title='Musica y Partituras'/>,
+        element: <MusicPage/>,
       },
       {
         path: "fotos-videos",
