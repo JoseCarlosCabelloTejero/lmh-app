@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, Spin, Empty } from 'antd';
-import { FileItem, type ApiFile } from './FileItem'; // Reutilizamos los tipos
+import { FileItem, type ApiFile } from '../FileItem/FileItem'; // Reutilizamos los tipos
 
 // Props del componente
 interface FileListProps {

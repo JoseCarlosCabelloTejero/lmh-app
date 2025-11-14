@@ -1,27 +1,7 @@
 import React from 'react';
 import { Collapse, Spin } from 'antd';
 import { YearFiles } from '../components/YearFiles';
-
-// Mock de la API que nos da los años disponibles
-const fetchAvailableYears = (): Promise<number[]> => {
-  return new Promise(res => setTimeout(() => res([2025, 2024, 2023]), 500));
-};
-
-// (En un proyecto real, esto vendría de useQuery)
-const useAvailableYears = () => {
-  const [years, setYears] = React.useState<number[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    fetchAvailableYears().then(data => {
-      setYears(data);
-      setIsLoading(false);
-    });
-  }, []);
-  
-  return { years, isLoading };
-};
-
+import { useAvailableYears } from '../hooks/useAvailableYears'
 
 export const MusicPage: React.FC = () => {
   const { years, isLoading } = useAvailableYears();
