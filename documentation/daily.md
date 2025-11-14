@@ -13,5 +13,20 @@ Problemas:
 - He empezado creando una rama para implementar la funcionalidad __Music__ llamada `feature/music`
 - He implementado esta funcionalidad, pero debo modularizar todo mucho más y aprender bien los conceptos que he usado y he implementado
 
+
+---
+## 14-11-2025
+
+- Hoy me he dedicado a aprender varios conceptos de TypeScript ya que me estaba costando aprender algunos conceptos
+    - Entre ellos está la propia ___inferencia de tipos__ de JavaScript y cómo TypeScript nos puede ayudar a definir el tipado explícitamente. Nos ayuda a detectar error antes de compilación e incluso que nuestro IDE nos haga sugerencias.
+    - Reglas de esLint que nos ayudan a ser más riguroso o no con TypeScript
+    - La transpilación que hace para convertirlo a JavaScript y como funciona el compilador `tsc`
+- Además, he modularizado mucho todo el código de la funcionalidad __Music__ separando todo en carpetas como:
+    - /hooks/
+    - /services/
+    - /common/components/componenteX
+
+Me hace falta aprender muchos conceptos tanto de typescript como de React, y de cómo enfocar una funcionalidad y desde el principio programar modularizando mucho
+
 ---
 ## xx-xx-2025
