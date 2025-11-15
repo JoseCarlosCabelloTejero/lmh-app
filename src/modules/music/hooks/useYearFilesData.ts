@@ -4,8 +4,10 @@ import { type ApiFile } from '../../common/FileItem';
 import { 
   fetchMusicApi, 
   fetchLyricsApi, 
-  uploadMusicApi, 
-  deleteMusicApi 
+  uploadMusicApi,
+  uploadLyricsApi, 
+  deleteMusicApi,
+  deleteLyricsApi
 } from '../services/musicApi';
 
 // 2. Mock de los "hooks" de React Query
@@ -22,6 +24,7 @@ export const useYearFilesData = (year: number) => {
   // Datos de Letras
   const [lyricsData, setLyricsData] = React.useState<ApiFile[]>([]);
   const [isLyricsLoading, setIsLyricsLoading] = React.useState(true);
+  const [deletingLyricsId, setDeletingLyricsId] = React.useState<string | null>(null);
   
   // Carga inicial (como lo haría useQuery)
   React.useEffect(() => {
@@ -37,12 +40,21 @@ export const useYearFilesData = (year: number) => {
     });
   }, [year]);
 
+
   // Mutación de Subida (como lo haría useMutation)
   const handleMusicUpload = async (file: File) => {
     const newFile = await uploadMusicApi(year, file);
     // React Query haría esto automático con "invalidateQueries"
     setMusicData(current => [...current, newFile]);
   };
+
+  // Mutación de Subida (como lo haría useMutation)
+  const handleLyricsUpload = async (file: File) => {
+    const newFile = await uploadLyricsApi(year, file);
+    // React Query haría esto automático con "invalidateQueries"
+    setLyricsData(current => [...current, newFile]);
+  };
+
 
   // Mutación de Borrado (como lo haría useMutation)
   const handleMusicDelete = async (id: string) => {
@@ -59,13 +71,28 @@ export const useYearFilesData = (year: number) => {
     }
   };
 
-  // ... (harías lo mismo para lyricsUpload y lyricsDelete) ...
+  // Mutación de Borrado (como lo haría useMutation)
+  const handleLyricscDelete = async (id: string) => {
+    setDeletingLyricsId(id);
+    try {
+      await deleteLyricsApi(year, id);
+      // React Query haría esto automático
+      setLyricsData(current => current.filter(f => f.id !== id));
+      message.success('Archivo borrado');
+    } catch (e) {
+      message.error('Error al borrar');
+    } finally {
+      setDeletingLyricsId(null);
+    }
+  };
+
   
   return {
     music: { data: musicData, isLoading: isMusicLoading, deletingId: deletingMusicId },
-    lyrics: { data: lyricsData, isLoading: isLyricsLoading },
+    lyrics: { data: lyricsData, isLoading: isLyricsLoading, deletingId: deletingLyricsId },
     handleMusicUpload,
+    handleLyricsUpload,
     handleMusicDelete,
-    // ... handlers de lyrics
+    handleLyricscDelete,
   };
 };

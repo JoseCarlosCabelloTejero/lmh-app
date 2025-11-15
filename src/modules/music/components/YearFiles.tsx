@@ -17,7 +17,9 @@ export const YearFiles: React.FC<YearFilesProps> = ({ year }) => {
     music,
     lyrics,
     handleMusicUpload,
+    handleLyricsUpload,
     handleMusicDelete,
+    handleLyricscDelete
   } = useYearFilesData(year);
 
   // 3. El renderizado: aquí componemos todo
@@ -40,11 +42,11 @@ export const YearFiles: React.FC<YearFilesProps> = ({ year }) => {
       <Col span={12}>
         {/* Sección de Letras */}
         <FileSection title="Letras">
-          <FileUploader onUpload={() => Promise.reject('No implementado')} />
+          <FileUploader onUpload={handleLyricsUpload} />
           <FileList
             files={lyrics.data}
             isLoading={lyrics.isLoading}
-            onDelete={() => alert('No implementado')}
+            onDelete={handleLyricscDelete}
           />
         </FileSection>
       </Col>
